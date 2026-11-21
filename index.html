@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salva Animales ONG</title>
+    <title>Salva Animales ONG - Adopción y Rescate</title>
+    
+    <!-- SEO y Redes Sociales (Para que se vea bien al compartir el link) -->
+    <meta name="description" content="Salva Animales ONG. Adoptá, no compres. Rescatamos, rehabilitamos y buscamos hogares responsables.">
+    <meta property="og:title" content="Salva Animales ONG">
+    <meta property="og:description" content="Dales una segunda oportunidad. Conocé los perritos en adopción.">
+    <meta property="og:image" content="logo.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -34,6 +41,10 @@
 
         .section-title { text-align: center; font-size: 2.8rem; font-weight: 700; margin-bottom: 50px; color: var(--primary-color); letter-spacing: -0.5px; }
 
+        /* ANIMACIONES AL SCROLL */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
         .btn { display: inline-block; padding: 14px 32px; border-radius: 50px; font-weight: 600; font-size: 1rem; transition: var(--transition); cursor: pointer; border: none; text-align: center; }
         .btn-primary { background-color: var(--primary-color); color: var(--white); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .btn-primary:hover { background-color: #333; transform: translateY(-2px); }
@@ -60,7 +71,7 @@
         .side-menu.open { right: 0; }
         .close-menu { align-self: flex-end; font-size: 1.8rem; cursor: pointer; color: var(--text-light); margin-bottom: 20px; }
         .side-menu ul { display: flex; flex-direction: column; gap: 15px; }
-        .side-menu a { font-size: 1.2rem; font-weight: 600; color: var(--text-dark); display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; transition: var(--transition); cursor: pointer; }
+        .side-menu a { font-size: 1.1rem; font-weight: 600; color: var(--text-dark); display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #eee; transition: var(--transition); cursor: pointer; }
         .side-menu a:hover { color: var(--secondary-color); padding-left: 10px; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1500; opacity: 0; visibility: hidden; transition: var(--transition); }
         .overlay.show { opacity: 1; visibility: visible; }
@@ -115,6 +126,28 @@
         .padrino-name { display: flex; align-items: center; gap: 10px; }
         .patitas { color: #ff9800; font-size: 1.2rem; letter-spacing: 2px; margin-top: 5px; }
 
+        /* SECCIÓN NOSOTROS */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-text h3 { font-size: 2rem; margin-bottom: 20px; color: var(--primary-color); }
+        .about-text p { margin-bottom: 15px; color: var(--text-light); font-size: 1.1rem; }
+        .legal-badge { display: inline-block; background: #e0f7fa; color: #006064; padding: 10px 20px; border-radius: 50px; font-weight: 600; margin-top: 20px; font-size: 1rem; }
+        .about-img img { width: 100%; border-radius: 20px; box-shadow: var(--shadow-md); }
+
+        /* SECCIÓN VOLUNTARIADO */
+        .volunteer-section { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1601758228041-f3b2795255f1') center/cover fixed; color: white; text-align: center; padding: 100px 0; }
+        .volunteer-section h2 { font-size: 2.5rem; margin-bottom: 20px; color: white; }
+        .volunteer-section p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px auto; }
+        
+        /* FAQ (PREGUNTAS FRECUENTES) */
+        .faq-section { max-width: 800px; margin: 0 auto; }
+        details { background: var(--accent-color); border-radius: 10px; margin-bottom: 15px; padding: 20px; cursor: pointer; border: 1px solid #eee; transition: var(--transition); }
+        details:hover { background: #fff; box-shadow: var(--shadow-sm); }
+        summary { font-weight: 600; font-size: 1.1rem; color: var(--primary-color); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '\002B'; font-size: 1.5rem; color: var(--secondary-color); }
+        details[open] summary::after { content: "\2212"; }
+        details p { margin-top: 15px; color: var(--text-light); }
+
         footer { background: var(--primary-color); color: #aaa; padding: 60px 0 30px 0; text-align: center; }
         footer img { filter: invert(1); height: 80px; margin-bottom: 20px; object-fit: contain; }
         .footer-contact { font-size: 1.8rem; color: var(--white); font-weight: 700; margin: 20px 0; }
@@ -122,18 +155,16 @@
         .social-footer a:hover { color: var(--secondary-color); }
         .transparency-link { display: inline-block; margin-top: 20px; color: var(--secondary-color); text-decoration: underline; font-weight: 600; }
 
-        /* MODALES GENERALES */
+        /* MODALES */
         .custom-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10001; justify-content: center; align-items: center; }
         .custom-modal.active { display: flex; animation: fadeIn 0.3s ease; }
         .custom-modal-content { background: white; padding: 40px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); text-align: center; }
         .custom-modal-content .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
         .custom-modal-content .close-modal:hover { color: var(--danger); }
         
-        /* FORMULARIO DE DONACIÓN */
         .donation-input { width: 100%; padding: 12px 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: inherit; }
         .donation-input:focus { outline: none; border-color: var(--secondary-color); }
 
-        /* MODAL ADMIN */
         .admin-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10002; justify-content: center; align-items: flex-start; padding-top: 50px; overflow-y: auto; padding-bottom: 50px; }
         .admin-modal.active { display: flex; }
         .admin-modal .modal-content { background: white; padding: 40px; border-radius: 20px; width: 90%; max-width: 900px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
@@ -167,6 +198,7 @@
             .pets-grid, .store-grid, .events-grid, .success-grid { grid-template-columns: 1fr; }
             .side-menu { width: 100%; right: -100%; }
             .adoption-cta { margin: -30px 20px 40px 20px; padding: 40px 15px; }
+            .about-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -181,33 +213,33 @@
 
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
+    <!-- MENÚ ACTUALIZADO CON NUEVAS SECCIONES -->
     <div class="side-menu" id="sideMenu">
         <i class="fas fa-times close-menu" onclick="toggleMenu()"></i>
         <ul>
             <li><a onclick="showPage('main'); toggleMenu()"><i class="fas fa-home"></i> Inicio</a></li>
-            <li><a onclick="showPage('store'); toggleMenu()"><i class="fas fa-shopping-bag"></i> Tienda Solidaria</a></li>
             <li><a onclick="openAdoptionModal(); toggleMenu()"><i class="fas fa-paw"></i> Perros en Adopción</a></li>
+            <li><a onclick="showPage('store'); toggleMenu()"><i class="fas fa-shopping-bag"></i> Tienda Solidaria</a></li>
             <li><a onclick="openDonationModal(); toggleMenu()"><i class="fas fa-heart"></i> Donar / Ser Padrino</a></li>
+            <li><a href="#nosotros" onclick="showPage('main'); setTimeout(() => document.getElementById('nosotros').scrollIntoView(), 100); toggleMenu()"><i class="fas fa-info-circle"></i> Sobre Nosotros</a></li>
+            <li><a href="#voluntariado" onclick="showPage('main'); setTimeout(() => document.getElementById('voluntariado').scrollIntoView(), 100); toggleMenu()"><i class="fas fa-hands-helping"></i> Voluntariado</a></li>
         </ul>
     </div>
 
     <button class="admin-login-btn" onclick="openLogin()" title="Admin"><i class="fas fa-cog"></i></button>
 
-    <!-- MODAL DE DONACIÓN (NUEVO) -->
+    <!-- MODALES (Donación y Admin se mantienen igual) -->
     <div class="custom-modal" id="donationModal">
         <div class="custom-modal-content">
             <span class="close-modal" onclick="closeDonationModal()">&times;</span>
             <h2 style="color: var(--primary-color); margin-bottom: 10px;">¡Convertite en Padrino!</h2>
-            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 25px;">Completá tus datos para sumar tu patita 🐾 y luego te llevamos a Mercado Pago para completar la donación.</p>
-            
+            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 25px;">Completá tus datos para sumar tu patita 🐾 y luego te llevamos a Mercado Pago.</p>
             <input type="text" id="donName" class="donation-input" placeholder="Nombre y Apellido">
-            <input type="tel" id="donPhone" class="donation-input" placeholder="Teléfono (Ej: 099123456)">
-            
+            <input type="tel" id="donPhone" class="donation-input" placeholder="Teléfono">
             <button class="btn btn-primary" style="width: 100%; background: var(--secondary-color);" onclick="processDonation()">Ir a Donar <i class="fas fa-external-link-alt"></i></button>
         </div>
     </div>
 
-    <!-- MODAL ADMIN -->
     <div class="admin-modal" id="adminModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeAdminModal()">&times;</span>
@@ -233,7 +265,7 @@
                     <button class="admin-tab" onclick="showAdminTab('settingsForm')">⚙️ Ajustes</button>
                 </div>
 
-                <!-- FORM PERRO -->
+                <!-- FORMULARIOS (Igual que la versión anterior) -->
                 <div class="admin-form active" id="addPetForm">
                     <h3 id="petFormTitle">Agregar Perro en Adopción</h3>
                     <input type="hidden" id="editPetId">
@@ -261,7 +293,6 @@
                     <button class="btn btn-primary" style="margin-top: 15px;" onclick="savePet()" id="btnSavePet">Guardar Perro</button>
                 </div>
 
-                <!-- FORM PRODUCTO -->
                 <div class="admin-form" id="addProductForm">
                     <h3>Agregar Producto a la Tienda</h3>
                     <input type="text" id="prodName" placeholder="Nombre del producto">
@@ -280,7 +311,6 @@
                     <button class="btn btn-primary" onclick="addProduct()">Guardar Producto</button>
                 </div>
 
-                <!-- FORM JORNADA -->
                 <div class="admin-form" id="addEventForm">
                     <h3>Gestión de Jornadas</h3>
                     <div id="admin-events-list" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;"></div>
@@ -296,7 +326,6 @@
                     <button class="btn btn-primary" onclick="addEvent()">Publicar Jornada</button>
                 </div>
 
-                <!-- FORM ÉXITO -->
                 <div class="admin-form" id="addSuccessForm">
                     <h3>Historias de Éxito (Adoptados)</h3>
                     <div id="admin-success-list" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;"></div>
@@ -310,16 +339,13 @@
                     <button class="btn btn-primary" onclick="addSuccess()">Agregar Historia</button>
                 </div>
 
-                <!-- FORM PADRINO MANUAL (Por si donan en efectivo o transferencia) -->
                 <div class="admin-form" id="addSponsorForm">
                     <h3>Agregar Padrino Manualmente</h3>
-                    <p style="font-size: 0.85rem; color: #666;">Usá esto solo si la persona donó en efectivo o transferencia y querés sumarle patitas.</p>
                     <input type="text" id="sponsorName" placeholder="Nombre del padrino o empresa">
                     <input type="number" id="sponsorPaws" placeholder="Cantidad de patitas a sumar" value="1">
                     <button class="btn btn-primary" onclick="addSponsorManual()">Agregar Padrino</button>
                 </div>
 
-                <!-- AJUSTES -->
                 <div class="admin-form" id="settingsForm">
                     <h3>Ajustes Generales</h3>
                     <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: -5px;">Link de Mercado Pago (Donaciones):</label>
@@ -346,41 +372,87 @@
             <div>
                 <h1>Dales una segunda oportunidad</h1>
                 <p>Adoptá, no compres. Salvá una vida hoy.</p>
-                <button onclick="showPage('store')" class="btn btn-primary">Ir a la Tienda Solidaria</button>
+                <button onclick="openAdoptionModal()" class="btn btn-primary" style="font-size: 1.2rem; padding: 18px 40px;"><i class="fas fa-paw"></i> Ver Perros en Adopción</button>
             </div>
         </section>
 
-        <div class="adoption-cta">
+        <div class="adoption-cta fade-in">
             <h2>¿Buscás un nuevo mejor amigo?</h2>
             <p>Tenemos muchos perritos esperando por una familia. Hacé clic abajo para conocerlos a todos.</p>
-            <button onclick="openAdoptionModal()" class="btn btn-primary" style="font-size: 1.2rem; padding: 18px 40px;"><i class="fas fa-paw"></i> Ver Perros en Adopción</button>
+            <button onclick="openAdoptionModal()" class="btn btn-primary" style="font-size: 1.2rem; padding: 18px 40px;">Ir al Catálogo</button>
         </div>
 
-        <section id="jornadas-section" class="container" style="padding-top: 0;">
+        <section id="jornadas-section" class="container fade-in" style="padding-top: 0;">
             <h2 class="section-title">Próximas Jornadas</h2>
             <div class="events-grid" id="events-container"></div>
         </section>
 
-        <section id="exitos-section" class="container" style="background-color: var(--accent-color); max-width: 100%;">
+        <!-- NUEVA SECCIÓN NOSOTROS -->
+        <section id="nosotros" class="container fade-in" style="background-color: var(--accent-color); max-width: 100%;">
             <div style="max-width: 1200px; margin: 0 auto; width: 90%;">
-                <h2 class="section-title">¡Adopciones Realizadas!</h2>
-                <div class="success-grid" id="success-container"></div>
+                <h2 class="section-title">Sobre Nosotros</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h3>Nuestra Historia</h3>
+                        <p>Salva Animales ONG nació con el sueño de rescatar, rehabilitar y encontrar hogares responsables para animales en situación de calle. Lo que empezó con un pequeño grupo de voluntarios, hoy es una organización comprometida con el bienestar animal.</p>
+                        <p>No recibimos fondos del estado; nos sostenemos gracias a las donaciones, la tienda solidaria y el esfuerzo de nuestros padrinos y voluntarios.</p>
+                        <div class="legal-badge"><i class="fas fa-certificate"></i> ONG Legalmente Constituida - Personería Jurídica en trámite</div>
+                    </div>
+                    <div class="about-img">
+                        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Equipo Salva Animales">
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section id="donaciones" style="background: var(--primary-color); color: white; padding: 80px 0; text-align: center;">
+        <!-- NUEVA SECCIÓN VOLUNTARIADO -->
+        <section id="voluntariado" class="volunteer-section fade-in">
+            <div class="container">
+                <h2>¿Querés ser parte del cambio?</h2>
+                <p>No solo de donaciones vive una ONG. Necesitamos personas dispuestas a dar un hogar temporal (tránsito), ayudar en las jornadas de adopción, o transportar animales al veterinario.</p>
+                <a href="https://wa.me/59895876666?text=Hola,%20quiero%20ser%20voluntario%20de%20Salva%20Animales" target="_blank" class="btn btn-primary" style="background: var(--whatsapp-color); color: white;">Quiero ser Voluntario <i class="fab fa-whatsapp"></i></a>
+            </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN FAQ -->
+        <section class="container fade-in">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <div class="faq-section">
+                <details>
+                    <summary>¿Cuáles son los requisitos para adoptar?</summary>
+                    <p>Ser mayor de edad, presentar cédula de identidad, tener el consentimiento de todos los integrantes de la familia, y comprometerse a mantener al animal dentro del hogar (no en el patio ni en la calle), brindarle alimentación, atención veterinaria y mucho amor.</p>
+                </details>
+                <details>
+                    <summary>¿Se puede adoptar si vivo en un apartamento?</summary>
+                    <p>¡Claro que sí! Lo importante no es el tamaño del hogar, sino el tiempo y la dedicación que le puedas dar al perrito. Evaluamos cada caso en particular para asegurar que sea el hogar ideal para ambos.</p>
+                </details>
+                <details>
+                    <summary>¿Los perros se entregan vacunados y castrados?</summary>
+                    <p>Depende del perro. En cada tarjeta de adopción indicamos si ya está castrado y su estado de vacunas. Si falta alguna, desde la ONG nos encargamos del proceso antes de la adopción o te acompañamos en el seguimiento posterior.</p>
+                </details>
+            </div>
+        </section>
+
+        <section id="donaciones" class="fade-in" style="background: var(--primary-color); color: white; padding: 80px 0; text-align: center;">
             <div class="container">
                 <h2 class="section-title" style="color: white;">Ayudanos a Seguir Rescatando</h2>
                 <p style="font-size: 1.2rem; margin-bottom: 30px; color: #ccc;">Cada donación suma una patita 🐾 en nuestro muro de Padrinos.</p>
-                <button onclick="openDonationModal()" class="btn btn-mp" style="max-width: 350px; margin: 0 auto; font-size: 1.2rem; padding: 18px;">Quiero Donar <i class="fas fa-heart" style="margin-left:10px;"></i></button>
+                <button onclick="openDonationModal()" class="btn btn-mp" style="max-width: 350px; margin: 0 auto; font-size: 1.2rem; padding: 18px; background: var(--secondary-color);">Quiero Donar <i class="fas fa-heart" style="margin-left:10px;"></i></button>
             </div>
         </section>
 
-        <section id="padrinos" class="padrinos-section">
+        <section id="padrinos" class="padrinos-section fade-in">
             <div class="container">
                 <h2 class="section-title">Nuestros Padrinos</h2>
                 <div class="padrinos-list" id="padrinos-container"></div>
             </div>
+        </section>
+        
+        <!-- SECCIÓN DE ÉXITOS -->
+        <section id="exitos-section" class="container fade-in">
+            <h2 class="section-title">¡Adopciones Realizadas!</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: var(--text-light);">Gracias a las familias que les dieron un hogar lleno de amor.</p>
+            <div class="success-grid" id="success-container"></div>
         </section>
     </div>
 
@@ -410,12 +482,19 @@
         <div class="container">
             <img src="logo.png" alt="Logo" id="footerLogo">
             <h3 style="color: white; font-size: 1.5rem; margin-bottom: 15px;">Salva Animales ONG</h3>
+            <p style="max-width: 600px; margin: 0 auto 20px auto;">ONG constituida legalmente dedicada al rescate, rehabilitación y adopción responsable.</p>
             <a href="#" class="transparency-link"><i class="fas fa-file-pdf"></i> Ver Balances y Estatutos</a>
             <div class="footer-contact" id="footerWhatsapp"><i class="fab fa-whatsapp"></i> Cargando...</div>
+            <div class="social-footer" style="margin-top: 30px;">
+                <a href="#" id="linkInstagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" id="linkFacebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" id="linkTiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
+            </div>
             <p style="margin-top: 40px; font-size: 0.8rem; opacity: 0.7;">&copy; 2027 Salva Animales ONG.</p>
         </div>
     </footer>
 
+    <!-- SCRIPT (Mismo de la versión anterior + Animación Scroll) -->
     <script>
         const CLAVE_ENCRIPTADA = "U2FsdmFBbmltYWxlczIwMjc=";
         
@@ -425,17 +504,30 @@
         let currentEventImgBase64 = "";
         let currentSuccessImgBase64 = "";
         
-        let config = {
-            whatsapp: "59895876666",
-            donationLink: "https://www.mercadopago.com.uy/" // Link de ejemplo
-        };
+        let config = { whatsapp: "59895876666", donationLink: "https://www.mercadopago.com.uy/" };
 
-        // --- NAVEGACIÓN BÁSICA ---
+        // --- ANIMACIÓN SCROLL ---
+        function reveal() {
+            var reveals = document.querySelectorAll(".fade-in");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("visible");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+
+        // --- NAVEGACIÓN ---
         function showPage(pageName) {
             document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
             if(pageName === 'store') document.getElementById('view-store').classList.add('active');
             else document.getElementById('view-main').classList.add('active');
             window.scrollTo(0, 0); 
+            reveal(); // Trigger animation
         }
 
         function toggleMenu() {
@@ -460,16 +552,14 @@
             document.body.style.overflow = 'auto';
         }
 
-        // --- SISTEMA AUTOMÁTICO DE DONACIÓN (PATITAS) ---
+        // --- DONACIÓN ---
         function openDonationModal() {
             document.getElementById('donationModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-
         function closeDonationModal() {
             document.getElementById('donationModal').classList.remove('active');
             document.body.style.overflow = 'auto';
-            // Limpiar campos
             document.getElementById('donName').value = '';
             document.getElementById('donPhone').value = '';
         }
@@ -477,51 +567,34 @@
         function processDonation() {
             const name = document.getElementById('donName').value.trim();
             const phone = document.getElementById('donPhone').value.trim();
+            if(!name || !phone) return alert("Por favor, completá tu nombre y teléfono.");
 
-            if(!name || !phone) {
-                return alert("Por favor, completá tu nombre y teléfono para registrarte como padrino.");
-            }
-
-            // Buscar si el padrino ya existe (por nombre o teléfono)
             let sponsors = JSON.parse(localStorage.getItem('sponsors')) || [];
             let existingSponsorIndex = sponsors.findIndex(s => s.name.toLowerCase() === name.toLowerCase() || s.phone === phone);
 
             if (existingSponsorIndex > -1) {
-                // Si ya existe, le sumamos 1 patita
                 sponsors[existingSponsorIndex].paws += 1;
                 alert(`¡Gracias por donar de nuevo, ${name}! Se sumó 1 patita más a tu perfil.`);
             } else {
-                // Si es nuevo, lo creamos con 1 patita
                 sponsors.push({ id: Date.now(), name: name, phone: phone, paws: 1 });
                 alert(`¡Muchas gracias ${name}! Ya sos parte del muro de padrinos.`);
             }
-
-            // Guardamos los cambios
             localStorage.setItem('sponsors', JSON.stringify(sponsors));
-            
-            // Actualizamos la vista visual
             renderSponsors();
             closeDonationModal();
-
-            // Redirigir a Mercado Pago después de registrarse
             window.open(config.donationLink, '_blank');
         }
 
-        // --- IMÁGENES ---
+        // --- IMÁGENES Y ADMIN ---
         function previewImage(input, previewId) {
             const file = input.files[0];
             if (file) {
-                if (file.size > 800000) {
-                    alert("La imagen es muy pesada (máx 800KB). Usá una captura o comprimila.");
-                    input.value = ""; 
-                    return;
-                }
+                if (file.size > 800000) { alert("La imagen es muy pesada (máx 800KB)."); input.value = ""; return; }
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const preview = document.getElementById(previewId);
                     preview.src = e.target.result;
                     preview.style.display = "block";
-                    
                     if (previewId === 'petImgPreview') currentPetImgBase64 = e.target.result;
                     if (previewId === 'prodImgPreview') currentProdImgBase64 = e.target.result;
                     if (previewId === 'eventImgPreview') currentEventImgBase64 = e.target.result;
@@ -531,7 +604,6 @@
             }
         }
 
-        // --- ADMIN ---
         function checkPassword() {
             const passIngresada = document.getElementById('adminPassword').value;
             if (btoa(passIngresada) === CLAVE_ENCRIPTADA) {
@@ -554,19 +626,13 @@
         }
 
         function closeAdminModal() { document.getElementById('adminModal').classList.remove('active'); }
-        
-        function logout() { 
-            isAdminMode = false; 
-            closeAdminModal(); 
-            renderPets(); renderSponsors(); renderProducts(); renderEventsFront(); renderSuccessFront(); 
-        }
+        function logout() { isAdminMode = false; closeAdminModal(); renderPets(); renderSponsors(); renderProducts(); renderEventsFront(); renderSuccessFront(); }
 
         function showAdminTab(tabId) {
             document.querySelectorAll('.admin-form').forEach(form => form.classList.remove('active'));
             document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             event.target.classList.add('active');
-
             if(tabId === 'addPetForm') {
                 document.getElementById('petFormTitle').innerText = "Agregar Perro en Adopción";
                 document.getElementById('btnSavePet').innerText = "Guardar Perro";
@@ -578,7 +644,7 @@
             }
         }
 
-        // --- CRUD PERROS ---
+        // --- CRUD ---
         function savePet() {
             const id = document.getElementById('editPetId').value;
             const name = document.getElementById('petName').value;
@@ -588,18 +654,14 @@
             const vaccinated = document.getElementById('petVaccinated').value;
             
             if(!name || !age || (!currentPetImgBase64 && !id)) return alert("Completá los campos y subí una foto");
-
             let pets = JSON.parse(localStorage.getItem('pets')) || [];
 
             if(id) {
                 const index = pets.findIndex(p => p.id == id);
-                if(index > -1) {
-                    pets[index] = { id: Number(id), name, age, type, castrated, vaccinated, img: currentPetImgBase64 ? currentPetImgBase64 : pets[index].img };
-                }
+                if(index > -1) pets[index] = { id: Number(id), name, age, type, castrated, vaccinated, img: currentPetImgBase64 ? currentPetImgBase64 : pets[index].img };
             } else {
                 pets.push({ id: Date.now(), name, age, type, castrated, vaccinated, img: currentPetImgBase64 });
             }
-
             localStorage.setItem('pets', JSON.stringify(pets));
             alert("Perro guardado con éxito");
             
@@ -609,7 +671,6 @@
             currentPetImgBase64 = "";
             document.getElementById('petFormTitle').innerText = "Agregar Perro en Adopción";
             document.getElementById('btnSavePet').innerText = "Guardar Perro";
-            
             renderPets();
         }
 
@@ -617,20 +678,17 @@
             let pets = JSON.parse(localStorage.getItem('pets')) || [];
             const pet = pets.find(p => p.id === id);
             if(!pet) return;
-
             document.getElementById('editPetId').value = pet.id;
             document.getElementById('petName').value = pet.name;
             document.getElementById('petAge').value = pet.age;
             document.getElementById('petType').value = pet.type;
             document.getElementById('petCastrated').value = pet.castrated || "Castrado";
             document.getElementById('petVaccinated').value = pet.vaccinated || "Vacunas al día";
-            
             if(pet.img) {
                 document.getElementById('petImgPreview').src = pet.img;
                 document.getElementById('petImgPreview').style.display = 'block';
                 currentPetImgBase64 = pet.img;
             }
-            
             document.getElementById('petFormTitle').innerText = "Editando Perro: " + pet.name;
             document.getElementById('btnSavePet').innerText = "Actualizar Cambios";
             
@@ -644,23 +702,10 @@
             const container = document.getElementById('pets-container');
             container.innerHTML = '';
             let pets = JSON.parse(localStorage.getItem('pets')) || [];
-
-            if(pets.length === 0) {
-                container.innerHTML = '<p style="text-align:center; width:100%;">No hay perritos cargados aún.</p>';
-                return;
-            }
+            if(pets.length === 0) { container.innerHTML = '<p style="text-align:center; width:100%;">No hay perritos cargados aún.</p>'; return; }
 
             pets.forEach(pet => {
-                let actionButtons = '';
-                if(isAdminMode) {
-                    actionButtons = `
-                        <div style="display:flex; justify-content:center; gap:10px; margin-top:10px;">
-                            <button class="btn-admin-action btn-edit" onclick="editPet(${pet.id})"><i class="fas fa-edit"></i> Editar</button>
-                            <button class="btn-admin-action btn-delete" onclick="deleteItem('pets', ${pet.id})"><i class="fas fa-trash"></i> Borrar</button>
-                        </div>
-                    `;
-                }
-                
+                let actionButtons = isAdminMode ? `<div style="display:flex; justify-content:center; gap:10px; margin-top:10px;"><button class="btn-admin-action btn-edit" onclick="editPet(${pet.id})"><i class="fas fa-edit"></i> Editar</button><button class="btn-admin-action btn-delete" onclick="deleteItem('pets', ${pet.id})"><i class="fas fa-trash"></i> Borrar</button></div>` : '';
                 let castradoIcon = pet.castrated && pet.castrated.includes("Falta") ? `<i class="fas fa-exclamation-circle" style="color:var(--warning);"></i>` : `<i class="fas fa-check-circle" style="color:var(--success);"></i>`;
                 let vacunaIcon = pet.vaccinated && pet.vaccinated.includes("Falta") ? `<i class="fas fa-exclamation-circle" style="color:var(--warning);"></i>` : `<i class="fas fa-check-circle" style="color:var(--success);"></i>`;
 
@@ -680,26 +725,21 @@
                     </div>
                 `;
             });
-            
             const activeTab = document.querySelector('.adoption-tabs .tab-btn.active');
             filterPets(activeTab && activeTab.innerText.includes('Adultos') ? 'adultos' : 'cachorros', activeTab);
         }
 
-        // --- OTROS CRUD ---
         function addEvent() {
             const title = document.getElementById('eventTitle').value;
             const date = document.getElementById('eventDate').value;
             if(!title || !date || !currentEventImgBase64) return alert("Completá título, fecha y subí el afiche");
-            
             let events = JSON.parse(localStorage.getItem('events')) || [];
             events.push({ id: Date.now(), title, date, img: currentEventImgBase64 });
             localStorage.setItem('events', JSON.stringify(events));
-            
             alert("Jornada publicada");
             document.getElementById('eventImgPreview').style.display = 'none';
             currentEventImgBase64 = "";
-            renderEventsAdmin();
-            renderEventsFront();
+            renderEventsAdmin(); renderEventsFront();
         }
 
         function renderEventsAdmin() {
@@ -707,12 +747,7 @@
             let events = JSON.parse(localStorage.getItem('events')) || [];
             list.innerHTML = events.length === 0 ? '<p>No hay jornadas activas.</p>' : '';
             events.forEach(ev => {
-                list.innerHTML += `
-                    <div style="background:white; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid #ddd;">
-                        <span><strong>${ev.title}</strong> - ${ev.date}</span>
-                        <button class="btn-admin-action btn-delete" style="width:auto;" onclick="deleteItem('events', ${ev.id})"><i class="fas fa-trash"></i></button>
-                    </div>
-                `;
+                list.innerHTML += `<div style="background:white; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid #ddd;"><span><strong>${ev.title}</strong> - ${ev.date}</span><button class="btn-admin-action btn-delete" style="width:auto;" onclick="deleteItem('events', ${ev.id})"><i class="fas fa-trash"></i></button></div>`;
             });
         }
 
@@ -722,15 +757,7 @@
             if(events.length === 0) { container.innerHTML = '<p style="text-align:center; width:100%;">Próximamente...</p>'; return; }
             container.innerHTML = '';
             events.forEach(ev => {
-                container.innerHTML += `
-                    <div class="event-card">
-                        <img src="${ev.img}" onclick="showLightbox(this.src)">
-                        <div class="event-info">
-                            <h3>${ev.title}</h3>
-                            <p style="color:var(--text-light);">${ev.date}</p>
-                        </div>
-                    </div>
-                `;
+                container.innerHTML += `<div class="event-card"><img src="${ev.img}" onclick="showLightbox(this.src)"><div class="event-info"><h3>${ev.title}</h3><p style="color:var(--text-light);">${ev.date}</p></div></div>`;
             });
         }
 
@@ -744,8 +771,7 @@
             document.getElementById('successName').value = '';
             document.getElementById('successImgPreview').style.display = 'none';
             currentSuccessImgBase64 = "";
-            renderSuccessAdmin();
-            renderSuccessFront();
+            renderSuccessAdmin(); renderSuccessFront();
         }
 
         function renderSuccessAdmin() {
@@ -753,12 +779,7 @@
             let success = JSON.parse(localStorage.getItem('success')) || [];
             list.innerHTML = success.length === 0 ? '<p>No hay historias cargadas.</p>' : '';
             success.forEach(s => {
-                list.innerHTML += `
-                    <div style="background:white; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid #ddd;">
-                        <span><strong>${s.name}</strong></span>
-                        <button class="btn-admin-action btn-delete" style="width:auto;" onclick="deleteItem('success', ${s.id})"><i class="fas fa-trash"></i></button>
-                    </div>
-                `;
+                list.innerHTML += `<div style="background:white; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid #ddd;"><span><strong>${s.name}</strong></span><button class="btn-admin-action btn-delete" style="width:auto;" onclick="deleteItem('success', ${s.id})"><i class="fas fa-trash"></i></button></div>`;
             });
         }
 
@@ -768,14 +789,7 @@
             if(success.length === 0) { container.innerHTML = '<p style="text-align:center; width:100%;">Próximamente...</p>'; return; }
             container.innerHTML = '';
             success.forEach(s => {
-                container.innerHTML += `
-                    <div class="success-card">
-                        <img src="${s.img}" onclick="showLightbox(this.src)">
-                        <div style="padding: 15px; text-align: center; background: white;">
-                            <h4 style="color: var(--primary-color);">${s.name} encontró hogar ❤️</h4>
-                        </div>
-                    </div>
-                `;
+                container.innerHTML += `<div class="success-card"><img src="${s.img}" onclick="showLightbox(this.src)"><div style="padding: 15px; text-align: center; background: white;"><h4 style="color: var(--primary-color);">${s.name} encontró hogar ❤️</h4></div></div>`;
             });
         }
 
@@ -814,7 +828,6 @@
             let items = JSON.parse(localStorage.getItem(key)) || [];
             items = items.filter(item => item.id !== id);
             localStorage.setItem(key, JSON.stringify(items));
-            
             if(key === 'pets') renderPets();
             if(key === 'sponsors') renderSponsors();
             if(key === 'products') renderProducts();
@@ -831,14 +844,7 @@
                 let stockHtml = `<p class="product-stock">Stock: <strong>${p.stock}</strong></p>`;
                 let adminStockControls = '';
                 if(isAdminMode) {
-                    adminStockControls = `
-                        <div class="stock-controls">
-                            <button class="stock-btn" onclick="updateStock(${p.id}, -1)">-</button>
-                            <span class="stock-num">${p.stock}</span>
-                            <button class="stock-btn" onclick="updateStock(${p.id}, 1)">+</button>
-                        </div>
-                        <button class="btn-admin-action btn-delete" style="width:100%; margin-top:10px;" onclick="deleteItem('products', ${p.id})"><i class="fas fa-trash"></i> Borrar</button>
-                    `;
+                    adminStockControls = `<div class="stock-controls"><button class="stock-btn" onclick="updateStock(${p.id}, -1)">-</button><span class="stock-num">${p.stock}</span><button class="stock-btn" onclick="updateStock(${p.id}, 1)">+</button></div><button class="btn-admin-action btn-delete" style="width:100%; margin-top:10px;" onclick="deleteItem('products', ${p.id})"><i class="fas fa-trash"></i> Borrar</button>`;
                     stockHtml = `<p class="product-stock">Modificar Stock:</p>`;
                 }
                 let selectorsHtml = '';
@@ -854,23 +860,8 @@
                     }
                     selectorsHtml += `</div>`;
                 }
-                const buyBtn = p.stock > 0 
-                    ? `<button onclick="buyProduct(${p.id})" class="btn btn-mp"><i class="fab fa-whatsapp"></i> Comprar</button>`
-                    : `<button class="btn btn-mp" style="background:#ccc; cursor:not-allowed;" disabled>Sin Stock</button>`;
-                container.innerHTML += `
-                    <div class="product-card">
-                        <img src="${p.img}" onclick="showLightbox(this.src)">
-                        <div class="product-info">
-                            <h3>${p.name}</h3>
-                            <p style="font-size:0.9rem; color:#666;">${p.desc || ''}</p>
-                            <div class="product-price">${p.price}</div>
-                            ${selectorsHtml}
-                            ${stockHtml}
-                            ${adminStockControls}
-                            ${!isAdminMode ? buyBtn : ''}
-                        </div>
-                    </div>
-                `;
+                const buyBtn = p.stock > 0 ? `<button onclick="buyProduct(${p.id})" class="btn btn-mp"><i class="fab fa-whatsapp"></i> Comprar</button>` : `<button class="btn btn-mp" style="background:#ccc; cursor:not-allowed;" disabled>Sin Stock</button>`;
+                container.innerHTML += `<div class="product-card"><img src="${p.img}" onclick="showLightbox(this.src)"><div class="product-info"><h3>${p.name}</h3><p style="font-size:0.9rem; color:#666;">${p.desc || ''}</p><div class="product-price">${p.price}</div>${selectorsHtml}${stockHtml}${adminStockControls}${!isAdminMode ? buyBtn : ''}</div></div>`;
             });
         }
 
@@ -905,19 +896,11 @@
             let sponsors = JSON.parse(localStorage.getItem('sponsors')) || [];
             if(sponsors.length === 0) { container.innerHTML = '<p>Próximamente...</p>'; return; }
             container.innerHTML = '';
-            
-            // Ordenar de mayor a menor cantidad de patitas
             sponsors.sort((a, b) => b.paws - a.paws);
-
             sponsors.forEach(s => {
                 const delBtn = isAdminMode ? `<button class="btn-admin-action btn-delete" style="padding: 2px 5px; font-size: 0.7rem; margin-left:5px;" onclick="deleteItem('sponsors', ${s.id})"><i class="fas fa-times"></i></button>` : '';
                 let patitas = '🐾'.repeat(Math.min(s.paws, 5)) + (s.paws > 5 ? ` (+${s.paws - 5})` : '');
-                container.innerHTML += `
-                    <div class="padrino-item">
-                        <div class="padrino-name">${s.name} ${delBtn}</div>
-                        <div class="patitas" title="${s.paws} donaciones">${patitas}</div>
-                    </div>
-                `;
+                container.innerHTML += `<div class="padrino-item"><div class="padrino-name">${s.name} ${delBtn}</div><div class="patitas" title="${s.paws} donaciones">${patitas}</div></div>`;
             });
         }
 
@@ -954,6 +937,8 @@
             const waNum = config.whatsapp || "59895876666";
             document.getElementById('footerWhatsapp').innerHTML = `<i class="fab fa-whatsapp"></i> ${waNum}`;
             document.getElementById('floatingWhatsapp').href = `https://wa.me/${waNum}`;
+            // Actualizamos el botón de voluntariado también con el número correcto
+            document.querySelector('.volunteer-section a').href = `https://wa.me/${waNum}?text=Hola,%20quiero%20ser%20voluntario%20de%20Salva%20Animales`;
         }
 
         window.onload = function() {
@@ -964,6 +949,7 @@
                 document.getElementById('footerLogo').src = customLogo;
             }
             renderPets(); renderEventsFront(); renderSuccessFront(); renderSponsors(); renderProducts();
+            reveal(); // Iniciar animaciones
         }
     </script>
 </body>
