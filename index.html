@@ -15,6 +15,7 @@
             --primary-color: #111111;
             --secondary-color: #009EE3;
             --whatsapp-color: #25D366;
+            --youtube-color: #FF0000;
             --accent-color: #F8F9FA;
             --text-dark: #2C2C2C;
             --text-light: #6C757D;
@@ -46,6 +47,10 @@
         .btn-mp { background-color: var(--whatsapp-color); color: var(--white); width: 100%; margin-top: 15px; }
         .btn-mp:hover { background-color: #1ebe54; transform: translateY(-2px); }
         
+        /* BOTÓN DE HISTORIA (YOUTUBE/IG) */
+        .btn-story { background-color: var(--youtube-color); color: white; width: 100%; margin-top: 10px; padding: 10px; font-size: 0.9rem; }
+        .btn-story:hover { background-color: #cc0000; transform: translateY(-2px); }
+
         .btn-admin-action { padding: 8px 12px; font-size: 0.85rem; border-radius: 5px; cursor: pointer; border: none; color: white; transition: var(--transition); margin: 5px 2px; width: 45%; }
         .btn-edit { background-color: var(--secondary-color); }
         .btn-edit:hover { background-color: #007bb5; }
@@ -78,11 +83,12 @@
         .view-section.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover; height: 70vh; min-height: 500px; max-height: 800px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); }
+        .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover; height: 60vh; min-height: 400px; max-height: 700px; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); }
         .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; margin-bottom: 20px; line-height: 1.2; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
         .hero p { font-size: clamp(1.1rem, 2vw, 1.5rem); margin-bottom: 40px; font-weight: 300; }
 
-        .adoption-cta { background: var(--white); text-align: center; padding: 60px 20px; border-radius: 20px; box-shadow: var(--shadow-md); margin: -50px auto 60px auto; max-width: 800px; position: relative; z-index: 10; border: 1px solid #eee; }
+        /* TARJETA CTA PRINCIPAL */
+        .adoption-cta { background: var(--white); text-align: center; padding: 60px 20px; border-radius: 20px; box-shadow: var(--shadow-md); margin: -60px auto 60px auto; max-width: 800px; position: relative; z-index: 10; border: 1px solid #eee; }
         .adoption-cta h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
         .adoption-cta p { color: var(--text-light); margin-bottom: 30px; font-size: 1.1rem; }
 
@@ -193,7 +199,7 @@
             .section-title { font-size: 2.2rem; }
             .pets-grid, .store-grid, .events-grid, .success-grid { grid-template-columns: 1fr; }
             .side-menu { width: 100%; right: -100%; }
-            .adoption-cta { margin: -30px 20px 40px 20px; padding: 40px 15px; }
+            .adoption-cta { margin: -40px 20px 40px 20px; padding: 40px 15px; }
             .about-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -260,6 +266,7 @@
                     <button class="admin-tab" onclick="showAdminTab('settingsForm')">⚙️ Ajustes</button>
                 </div>
 
+                <!-- FORM PERRO CON LINK DE HISTORIA -->
                 <div class="admin-form active" id="addPetForm">
                     <h3 id="petFormTitle">Agregar Perro en Adopción</h3>
                     <input type="hidden" id="editPetId">
@@ -268,6 +275,7 @@
                     <select id="petType"><option value="cachorros">Cachorro</option><option value="adultos">Adulto</option></select>
                     <select id="petCastrated"><option value="Castrado">✅ Castrado</option><option value="Falta Castrar">⚠️ Falta Castrar</option></select>
                     <select id="petVaccinated"><option value="Vacunas al día">✅ Vacunas al día</option><option value="Falta Plan de Vacunas">⚠️ Falta Plan de Vacunas</option></select>
+                    <input type="url" id="petStoryLink" placeholder="Link de su Historia (YouTube/Instagram - Opcional)">
                     <div class="file-input-wrapper" style="margin-top: 10px;"><span class="file-input-btn"><i class="fas fa-camera"></i> Subir foto del perro</span><input type="file" id="petImgFile" accept="image/*" onchange="previewImage(this, 'petImgPreview')"></div>
                     <img id="petImgPreview" style="display:none; max-height: 150px; border-radius: 10px; object-fit: contain; margin: 0 auto;">
                     <button class="btn btn-primary" style="margin-top: 15px;" onclick="savePet()" id="btnSavePet">Guardar Perro</button>
@@ -307,7 +315,6 @@
                     <button class="btn btn-primary" onclick="addSuccess()">Agregar Historia</button>
                 </div>
 
-                <!-- FORM FAQ CON EDITAR -->
                 <div class="admin-form" id="addFaqForm">
                     <h3>Preguntas Frecuentes</h3>
                     <div id="admin-faq-list" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;"></div>
@@ -318,11 +325,13 @@
                     <button class="btn btn-primary" onclick="addFaq()" id="btnSaveFaq">Agregar Pregunta</button>
                 </div>
 
+                <!-- FORM SPONSOR CON LINK -->
                 <div class="admin-form" id="addSponsorLogoForm">
                     <h3>Empresas / Sponsors</h3>
                     <div id="admin-sponsor-logo-list" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;"></div>
                     <hr style="border: 1px solid #ddd; margin: 10px 0;">
                     <input type="text" id="sponsorLogoName" placeholder="Nombre de la Empresa">
+                    <input type="url" id="sponsorLogoLink" placeholder="Link de la empresa (Ej: https://instagram.com/empresa)">
                     <div class="file-input-wrapper"><span class="file-input-btn"><i class="fas fa-image"></i> Subir Logo</span><input type="file" id="sponsorLogoFile" accept="image/*" onchange="previewImage(this, 'sponsorLogoPreview')"></div>
                     <img id="sponsorLogoPreview" style="display:none; max-height: 150px; border-radius: 10px; object-fit: contain; margin: 0 auto;">
                     <button class="btn btn-primary" onclick="addSponsorLogo()">Agregar Sponsor</button>
@@ -356,18 +365,19 @@
     </header>
 
     <div id="view-main" class="view-section active">
+        <!-- PORTADA SIN BOTÓN (El botón va en la tarjeta de abajo) -->
         <section class="hero">
             <div>
                 <h1>Dales una segunda oportunidad</h1>
                 <p>Adoptá, no compres. Salvá una vida hoy.</p>
-                <button onclick="openAdoptionModal()" class="btn btn-primary" style="font-size: 1.2rem; padding: 18px 40px;"><i class="fas fa-paw"></i> Ver Perros en Adopción</button>
             </div>
         </section>
 
+        <!-- TARJETA PRINCIPAL CTA -->
         <div class="adoption-cta fade-in">
             <h2>¿Buscás un nuevo mejor amigo?</h2>
             <p>Tenemos muchos perritos esperando por una familia. Hacé clic abajo para conocerlos a todos.</p>
-            <button onclick="openAdoptionModal()" class="btn btn-primary" style="font-size: 1.2rem; padding: 18px 40px;">Ir al Catálogo</button>
+            <button onclick="openAdoptionModal()" class="btn btn-primary" style="font-size: 1.2rem; padding: 18px 40px;"><i class="fas fa-paw"></i> Ver Perros en Adopción</button>
         </div>
 
         <section id="jornadas-section" class="container fade-in" style="padding-top: 0;">
@@ -487,27 +497,13 @@
             tiktok: "#"
         };
 
-        // --- INICIALIZAR FAQS POR DEFECTO (LAS QUE TE GUSTABAN) ---
         function initFaqs() {
             let faqs = JSON.parse(localStorage.getItem('faqs'));
             if (faqs === null) {
-                // Si es la primera vez, cargamos las 3 preguntas con las respuestas detalladas
                 faqs = [
-                    { 
-                        id: 1, 
-                        q: "¿Cuáles son los requisitos para adoptar?", 
-                        a: "Ser mayor de edad, presentar cédula de identidad, tener el consentimiento de todos los integrantes de la familia, y comprometerse a mantener al animal dentro del hogar (no en el patio ni en la calle), brindarle alimentación, atención veterinaria y mucho amor." 
-                    },
-                    { 
-                        id: 2, 
-                        q: "¿Se puede adoptar si vivo en un apartamento?", 
-                        a: "¡Claro que sí! Lo importante no es el tamaño del hogar, sino el tiempo y la dedicación que le puedas dar al perrito. Evaluamos cada caso en particular para asegurar que sea el hogar ideal para ambos." 
-                    },
-                    { 
-                        id: 3, 
-                        q: "¿Los perros se entregan vacunados y castrados?", 
-                        a: "Depende del perro. En cada tarjeta de adopción indicamos si ya está castrado y su estado de vacunas. Si falta alguna, desde la ONG nos encargamos del proceso antes de la adopción o te acompañamos en el seguimiento posterior." 
-                    }
+                    { id: 1, q: "¿Cuáles son los requisitos para adoptar?", a: "Ser mayor de edad, presentar cédula de identidad, tener el consentimiento de todos los integrantes de la familia, y comprometerse a mantener al animal dentro del hogar (no en el patio ni en la calle), brindarle alimentación, atención veterinaria y mucho amor." },
+                    { id: 2, q: "¿Se puede adoptar si vivo en un apartamento?", a: "¡Claro que sí! Lo importante no es el tamaño del hogar, sino el tiempo y la dedicación que le puedas dar al perrito. Evaluamos cada caso en particular para asegurar que sea el hogar ideal para ambos." },
+                    { id: 3, q: "¿Los perros se entregan vacunados y castrados?", a: "Depende del perro. En cada tarjeta de adopción indicamos si ya está castrado y su estado de vacunas. Si falta alguna, desde la ONG nos encargamos del proceso antes de la adopción o te acompañamos en el seguimiento posterior." }
                 ];
                 localStorage.setItem('faqs', JSON.stringify(faqs));
             }
@@ -638,13 +634,13 @@
             document.getElementById(tabId).classList.add('active');
             event.target.classList.add('active');
             
-            // Limpiar formularios al cambiar de pestaña
             if(tabId === 'addPetForm') {
                 document.getElementById('petFormTitle').innerText = "Agregar Perro en Adopción";
                 document.getElementById('btnSavePet').innerText = "Guardar Perro";
                 document.getElementById('editPetId').value = "";
                 document.getElementById('petName').value = "";
                 document.getElementById('petAge').value = "";
+                document.getElementById('petStoryLink').value = "";
                 document.getElementById('petImgPreview').style.display = 'none';
                 currentPetImgBase64 = "";
             }
@@ -656,7 +652,7 @@
             }
         }
 
-        // --- CRUD PERROS ---
+        // --- CRUD PERROS (AHORA CON LINK DE HISTORIA) ---
         function savePet() {
             const id = document.getElementById('editPetId').value;
             const name = document.getElementById('petName').value;
@@ -664,21 +660,24 @@
             const type = document.getElementById('petType').value;
             const castrated = document.getElementById('petCastrated').value;
             const vaccinated = document.getElementById('petVaccinated').value;
+            const storyLink = document.getElementById('petStoryLink').value; // NUEVO
             
             if(!name || !age || (!currentPetImgBase64 && !id)) return alert("Completá los campos y subí una foto");
             let pets = JSON.parse(localStorage.getItem('pets')) || [];
 
             if(id) {
                 const index = pets.findIndex(p => p.id == id);
-                if(index > -1) pets[index] = { id: Number(id), name, age, type, castrated, vaccinated, img: currentPetImgBase64 ? currentPetImgBase64 : pets[index].img };
+                if(index > -1) pets[index] = { id: Number(id), name, age, type, castrated, vaccinated, storyLink, img: currentPetImgBase64 ? currentPetImgBase64 : pets[index].img };
             } else {
-                pets.push({ id: Date.now(), name, age, type, castrated, vaccinated, img: currentPetImgBase64 });
+                pets.push({ id: Date.now(), name, age, type, castrated, vaccinated, storyLink, img: currentPetImgBase64 });
             }
             localStorage.setItem('pets', JSON.stringify(pets));
             alert("Perro guardado con éxito");
             
             document.getElementById('editPetId').value = "";
             document.getElementById('petName').value = ''; 
+            document.getElementById('petAge').value = '';
+            document.getElementById('petStoryLink').value = '';
             document.getElementById('petImgPreview').style.display = 'none';
             currentPetImgBase64 = "";
             document.getElementById('petFormTitle').innerText = "Agregar Perro en Adopción";
@@ -696,6 +695,8 @@
             document.getElementById('petType').value = pet.type;
             document.getElementById('petCastrated').value = pet.castrated || "Castrado";
             document.getElementById('petVaccinated').value = pet.vaccinated || "Vacunas al día";
+            document.getElementById('petStoryLink').value = pet.storyLink || ""; // NUEVO
+            
             if(pet.img) {
                 document.getElementById('petImgPreview').src = pet.img;
                 document.getElementById('petImgPreview').style.display = 'block';
@@ -722,6 +723,12 @@
                 let castradoIcon = pet.castrated && pet.castrated.includes("Falta") ? `<i class="fas fa-exclamation-circle" style="color:var(--warning);"></i>` : `<i class="fas fa-check-circle" style="color:var(--success);"></i>`;
                 let vacunaIcon = pet.vaccinated && pet.vaccinated.includes("Falta") ? `<i class="fas fa-exclamation-circle" style="color:var(--warning);"></i>` : `<i class="fas fa-check-circle" style="color:var(--success);"></i>`;
 
+                // BOTÓN DE HISTORIA (SI EXISTE EL LINK)
+                let storyBtn = '';
+                if(pet.storyLink) {
+                    storyBtn = `<a href="${pet.storyLink}" target="_blank" class="btn btn-story"><i class="fab fa-youtube"></i> Ver su Historia de Rescate</a>`;
+                }
+
                 container.innerHTML += `
                     <div class="pet-card ${pet.type}">
                         <img src="${pet.img}" alt="${pet.name}" onclick="showLightbox(this.src)">
@@ -733,6 +740,7 @@
                                 <p>${vacunaIcon} ${pet.vaccinated || 'Vacunas N/A'}</p>
                             </div>
                             <a href="https://wa.me/${config.whatsapp}?text=Hola,%20estoy%20interesado%20en%20adoptar%20a%20${pet.name}" target="_blank" class="btn btn-primary" style="width: 100%;">Quiero Adoptarlo</a>
+                            ${storyBtn}
                             ${actionButtons}
                         </div>
                     </div>
@@ -742,7 +750,7 @@
             filterPets(activeTab && activeTab.innerText.includes('Adultos') ? 'adultos' : 'cachorros', activeTab);
         }
 
-        // --- CRUD FAQ (CON EDITAR) ---
+        // --- CRUD FAQ ---
         function addFaq() {
             const id = document.getElementById('editFaqId').value;
             const q = document.getElementById('faqQuestion').value;
@@ -750,18 +758,12 @@
             if(!q || !a) return alert("Completá la pregunta y la respuesta");
             
             let faqs = JSON.parse(localStorage.getItem('faqs')) || [];
-            
             if (id) {
-                // Editando
                 const index = faqs.findIndex(f => f.id == id);
-                if (index > -1) {
-                    faqs[index] = { id: Number(id), q, a };
-                }
+                if (index > -1) faqs[index] = { id: Number(id), q, a };
             } else {
-                // Agregando nueva
                 faqs.push({ id: Date.now(), q, a });
             }
-            
             localStorage.setItem('faqs', JSON.stringify(faqs));
             
             alert("Pregunta guardada");
@@ -784,11 +786,9 @@
             
             document.getElementById('btnSaveFaq').innerText = "Actualizar Pregunta";
             
-            // Asegurarse de estar en la pestaña FAQ
             document.querySelectorAll('.admin-form').forEach(form => form.classList.remove('active'));
             document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
             document.getElementById('addFaqForm').classList.add('active');
-            // Encontrar el botón de la pestaña FAQ y activarlo
             Array.from(document.querySelectorAll('.admin-tab')).find(tab => tab.innerText.includes('FAQ')).classList.add('active');
         }
 
@@ -817,17 +817,19 @@
             });
         }
 
-        // --- CRUD SPONSOR LOGO ---
+        // --- CRUD SPONSOR LOGO (CON LINK) ---
         function addSponsorLogo() {
             const name = document.getElementById('sponsorLogoName').value;
+            const link = document.getElementById('sponsorLogoLink').value; // NUEVO
             if(!name || !currentSponsorLogoBase64) return alert("Completá el nombre y subí el logo");
             
             let logos = JSON.parse(localStorage.getItem('sponsorLogos')) || [];
-            logos.push({ id: Date.now(), name, img: currentSponsorLogoBase64 });
+            logos.push({ id: Date.now(), name, link, img: currentSponsorLogoBase64 });
             localStorage.setItem('sponsorLogos', JSON.stringify(logos));
             
             alert("Sponsor agregado");
             document.getElementById('sponsorLogoName').value = '';
+            document.getElementById('sponsorLogoLink').value = '';
             document.getElementById('sponsorLogoPreview').style.display = 'none';
             currentSponsorLogoBase64 = "";
             renderSponsorLogoAdmin(); renderSponsorLogoFront();
@@ -838,7 +840,8 @@
             let logos = JSON.parse(localStorage.getItem('sponsorLogos')) || [];
             list.innerHTML = logos.length === 0 ? '<p>No hay sponsors cargados.</p>' : '';
             logos.forEach(l => {
-                list.innerHTML += `<div style="background:white; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid #ddd;"><span><strong>${l.name}</strong></span><button class="btn-admin-action btn-delete" style="width:auto;" onclick="deleteItem('sponsorLogos', ${l.id})"><i class="fas fa-trash"></i></button></div>`;
+                let linkText = l.link ? `<br><small style="color:blue;">${l.link}</small>` : '';
+                list.innerHTML += `<div style="background:white; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid #ddd;"><span><strong>${l.name}</strong>${linkText}</span><button class="btn-admin-action btn-delete" style="width:auto;" onclick="deleteItem('sponsorLogos', ${l.id})"><i class="fas fa-trash"></i></button></div>`;
             });
         }
 
@@ -848,11 +851,16 @@
             if(logos.length === 0) { container.innerHTML = '<p style="color:var(--text-light);">Próximamente...</p>'; return; }
             container.innerHTML = '';
             logos.forEach(l => {
-                container.innerHTML += `<img src="${l.img}" alt="${l.name}" class="sponsor-logo" title="${l.name}" onclick="showLightbox(this.src)">`;
+                // SI TIENE LINK, LO ENVOLVEMOS EN UN <a>
+                let imgHtml = `<img src="${l.img}" alt="${l.name}" class="sponsor-logo" title="${l.name}" onclick="showLightbox(this.src)">`;
+                if(l.link) {
+                    imgHtml = `<a href="${l.link}" target="_blank" title="Visitar ${l.name}">${imgHtml}</a>`;
+                }
+                container.innerHTML += imgHtml;
             });
         }
 
-        // --- CRUD OTROS ---
+        // --- OTROS CRUD ---
         function addEvent() {
             const title = document.getElementById('eventTitle').value;
             const date = document.getElementById('eventDate').value;
@@ -1072,7 +1080,7 @@
         }
 
         window.onload = function() {
-            initFaqs(); // Carga las preguntas originales la primera vez
+            initFaqs(); 
             loadConfig(); 
             const customLogo = localStorage.getItem('customLogo');
             if(customLogo) {
