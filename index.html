@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salva Animales ONG - Adopción y Rescate</title>
     
-    <!-- SEO y Redes Sociales (Para que se vea bien al compartir el link) -->
     <meta name="description" content="Salva Animales ONG. Adoptá, no compres. Rescatamos, rehabilitamos y buscamos hogares responsables.">
-    <meta property="og:title" content="Salva Animales ONG">
-    <meta property="og:description" content="Dales una segunda oportunidad. Conocé los perritos en adopción.">
-    <meta property="og:image" content="logo.png">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -41,7 +37,6 @@
 
         .section-title { text-align: center; font-size: 2.8rem; font-weight: 700; margin-bottom: 50px; color: var(--primary-color); letter-spacing: -0.5px; }
 
-        /* ANIMACIONES AL SCROLL */
         .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
@@ -51,6 +46,7 @@
         .btn-mp { background-color: var(--whatsapp-color); color: var(--white); width: 100%; margin-top: 15px; }
         .btn-mp:hover { background-color: #1ebe54; transform: translateY(-2px); }
         
+        /* BOTONES ADMIN (SOLO VISIBLES EN MODO ADMIN) */
         .btn-admin-action { padding: 8px 12px; font-size: 0.85rem; border-radius: 5px; cursor: pointer; border: none; color: white; transition: var(--transition); margin: 5px 2px; width: 45%; }
         .btn-edit { background-color: var(--secondary-color); }
         .btn-edit:hover { background-color: #007bb5; }
@@ -125,6 +121,12 @@
         .padrino-item { background: var(--white); padding: 15px 25px; border-radius: 50px; box-shadow: var(--shadow-sm); font-weight: 600; font-size: 1.1rem; position: relative; display: flex; flex-direction: column; align-items: center; }
         .padrino-name { display: flex; align-items: center; gap: 10px; }
         .patitas { color: #ff9800; font-size: 1.2rem; letter-spacing: 2px; margin-top: 5px; }
+
+        /* SECCIÓN SPONSORS (EMPRESAS) */
+        .sponsors-section { padding: 60px 0; background: white; text-align: center; border-top: 1px solid #eee; }
+        .sponsors-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; align-items: center; }
+        .sponsor-logo { max-height: 80px; max-width: 200px; object-fit: contain; filter: grayscale(100%); transition: var(--transition); cursor: pointer; }
+        .sponsor-logo:hover { filter: grayscale(0%); transform: scale(1.05); }
 
         /* SECCIÓN NOSOTROS */
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
@@ -213,7 +215,6 @@
 
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <!-- MENÚ ACTUALIZADO CON NUEVAS SECCIONES -->
     <div class="side-menu" id="sideMenu">
         <i class="fas fa-times close-menu" onclick="toggleMenu()"></i>
         <ul>
@@ -228,7 +229,7 @@
 
     <button class="admin-login-btn" onclick="openLogin()" title="Admin"><i class="fas fa-cog"></i></button>
 
-    <!-- MODALES (Donación y Admin se mantienen igual) -->
+    <!-- MODAL DONACIÓN -->
     <div class="custom-modal" id="donationModal">
         <div class="custom-modal-content">
             <span class="close-modal" onclick="closeDonationModal()">&times;</span>
@@ -240,6 +241,7 @@
         </div>
     </div>
 
+    <!-- MODAL ADMIN COMPLETO -->
     <div class="admin-modal" id="adminModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeAdminModal()">&times;</span>
@@ -255,103 +257,103 @@
 
             <div id="adminPanel" style="display: none;">
                 <h2 style="color: var(--primary-color); margin-bottom: 10px; font-size: 2rem;">Panel de Control</h2>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">Los botones de editar y borrar SOLO son visibles para vos.</p>
                 
                 <div class="admin-tabs">
                     <button class="admin-tab active" onclick="showAdminTab('addPetForm')">+ Perro</button>
                     <button class="admin-tab" onclick="showAdminTab('addProductForm')">+ Producto</button>
                     <button class="admin-tab" onclick="showAdminTab('addEventForm')">+ Jornada</button>
                     <button class="admin-tab" onclick="showAdminTab('addSuccessForm')">+ Éxito</button>
-                    <button class="admin-tab" onclick="showAdminTab('addSponsorForm')">+ Padrino Manual</button>
+                    <button class="admin-tab" onclick="showAdminTab('addFaqForm')">+ FAQ</button>
+                    <button class="admin-tab" onclick="showAdminTab('addSponsorLogoForm')">+ Sponsor</button>
                     <button class="admin-tab" onclick="showAdminTab('settingsForm')">⚙️ Ajustes</button>
                 </div>
 
-                <!-- FORMULARIOS (Igual que la versión anterior) -->
+                <!-- FORM PERRO -->
                 <div class="admin-form active" id="addPetForm">
                     <h3 id="petFormTitle">Agregar Perro en Adopción</h3>
                     <input type="hidden" id="editPetId">
                     <input type="text" id="petName" placeholder="Nombre del perro">
                     <input type="text" id="petAge" placeholder="Edad (ej: 3 meses)">
-                    <select id="petType">
-                        <option value="cachorros">Cachorro</option>
-                        <option value="adultos">Adulto</option>
-                    </select>
-                    <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: -5px;">Estado de Castración:</label>
-                    <select id="petCastrated">
-                        <option value="Castrado">✅ Castrado</option>
-                        <option value="Falta Castrar">⚠️ Falta Castrar</option>
-                    </select>
-                    <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: -5px;">Estado de Vacunas:</label>
-                    <select id="petVaccinated">
-                        <option value="Vacunas al día">✅ Vacunas al día</option>
-                        <option value="Falta Plan de Vacunas">⚠️ Falta Plan de Vacunas</option>
-                    </select>
-                    <div class="file-input-wrapper" style="margin-top: 10px;">
-                        <span class="file-input-btn"><i class="fas fa-camera"></i> Subir foto del perro</span>
-                        <input type="file" id="petImgFile" accept="image/*" onchange="previewImage(this, 'petImgPreview')">
-                    </div>
+                    <select id="petType"><option value="cachorros">Cachorro</option><option value="adultos">Adulto</option></select>
+                    <select id="petCastrated"><option value="Castrado">✅ Castrado</option><option value="Falta Castrar">⚠️ Falta Castrar</option></select>
+                    <select id="petVaccinated"><option value="Vacunas al día">✅ Vacunas al día</option><option value="Falta Plan de Vacunas">⚠️ Falta Plan de Vacunas</option></select>
+                    <div class="file-input-wrapper" style="margin-top: 10px;"><span class="file-input-btn"><i class="fas fa-camera"></i> Subir foto del perro</span><input type="file" id="petImgFile" accept="image/*" onchange="previewImage(this, 'petImgPreview')"></div>
                     <img id="petImgPreview" style="display:none; max-height: 150px; border-radius: 10px; object-fit: contain; margin: 0 auto;">
                     <button class="btn btn-primary" style="margin-top: 15px;" onclick="savePet()" id="btnSavePet">Guardar Perro</button>
                 </div>
 
+                <!-- FORM PRODUCTO -->
                 <div class="admin-form" id="addProductForm">
-                    <h3>Agregar Producto a la Tienda</h3>
+                    <h3>Agregar Producto</h3>
                     <input type="text" id="prodName" placeholder="Nombre del producto">
                     <textarea id="prodDesc" placeholder="Descripción corta..."></textarea>
-                    <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: -5px;">Talles (separados por coma):</label>
-                    <input type="text" id="prodSize" placeholder="Ej: S, M, L, XL (o N/A)">
-                    <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: -5px;">Colores (separados por coma):</label>
-                    <input type="text" id="prodColor" placeholder="Ej: Negro, Blanco">
-                    <input type="number" id="prodStock" placeholder="Cantidad inicial en Stock">
+                    <input type="text" id="prodSize" placeholder="Talles (S, M, L) o N/A">
+                    <input type="text" id="prodColor" placeholder="Colores (Negro, Blanco) o N/A">
+                    <input type="number" id="prodStock" placeholder="Cantidad en Stock">
                     <input type="text" id="prodPrice" placeholder="Precio (Ej: $15.000)">
-                    <div class="file-input-wrapper">
-                        <span class="file-input-btn"><i class="fas fa-image"></i> Subir foto del producto</span>
-                        <input type="file" id="prodImgFile" accept="image/*" onchange="previewImage(this, 'prodImgPreview')">
-                    </div>
+                    <div class="file-input-wrapper"><span class="file-input-btn"><i class="fas fa-image"></i> Subir foto</span><input type="file" id="prodImgFile" accept="image/*" onchange="previewImage(this, 'prodImgPreview')"></div>
                     <img id="prodImgPreview" style="display:none; max-height: 150px; border-radius: 10px; object-fit: contain; margin: 0 auto;">
                     <button class="btn btn-primary" onclick="addProduct()">Guardar Producto</button>
                 </div>
 
+                <!-- FORM JORNADA -->
                 <div class="admin-form" id="addEventForm">
                     <h3>Gestión de Jornadas</h3>
                     <div id="admin-events-list" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;"></div>
                     <hr style="border: 1px solid #ddd; margin: 10px 0;">
-                    <h4>Subir Nueva Jornada:</h4>
-                    <input type="text" id="eventTitle" placeholder="Título (Ej: Jornada de Adopción)">
+                    <input type="text" id="eventTitle" placeholder="Título de la Jornada">
                     <input type="text" id="eventDate" placeholder="Fecha y Lugar">
-                    <div class="file-input-wrapper">
-                        <span class="file-input-btn"><i class="fas fa-image"></i> Subir afiche de la jornada</span>
-                        <input type="file" id="eventImgFile" accept="image/*" onchange="previewImage(this, 'eventImgPreview')">
-                    </div>
+                    <div class="file-input-wrapper"><span class="file-input-btn"><i class="fas fa-image"></i> Subir afiche</span><input type="file" id="eventImgFile" accept="image/*" onchange="previewImage(this, 'eventImgPreview')"></div>
                     <img id="eventImgPreview" style="display:none; max-height: 150px; border-radius: 10px; object-fit: contain; margin: 0 auto;">
                     <button class="btn btn-primary" onclick="addEvent()">Publicar Jornada</button>
                 </div>
 
+                <!-- FORM ÉXITO -->
                 <div class="admin-form" id="addSuccessForm">
-                    <h3>Historias de Éxito (Adoptados)</h3>
+                    <h3>Adopciones Realizadas</h3>
                     <div id="admin-success-list" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;"></div>
                     <hr style="border: 1px solid #ddd; margin: 10px 0;">
                     <input type="text" id="successName" placeholder="Nombre del perrito adoptado">
-                    <div class="file-input-wrapper">
-                        <span class="file-input-btn"><i class="fas fa-image"></i> Subir foto</span>
-                        <input type="file" id="successImgFile" accept="image/*" onchange="previewImage(this, 'successImgPreview')">
-                    </div>
+                    <div class="file-input-wrapper"><span class="file-input-btn"><i class="fas fa-image"></i> Subir foto</span><input type="file" id="successImgFile" accept="image/*" onchange="previewImage(this, 'successImgPreview')"></div>
                     <img id="successImgPreview" style="display:none; max-height: 150px; border-radius: 10px; object-fit: contain; margin: 0 auto;">
                     <button class="btn btn-primary" onclick="addSuccess()">Agregar Historia</button>
                 </div>
 
-                <div class="admin-form" id="addSponsorForm">
-                    <h3>Agregar Padrino Manualmente</h3>
-                    <input type="text" id="sponsorName" placeholder="Nombre del padrino o empresa">
-                    <input type="number" id="sponsorPaws" placeholder="Cantidad de patitas a sumar" value="1">
-                    <button class="btn btn-primary" onclick="addSponsorManual()">Agregar Padrino</button>
+                <!-- FORM FAQ (NUEVO) -->
+                <div class="admin-form" id="addFaqForm">
+                    <h3>Preguntas Frecuentes</h3>
+                    <div id="admin-faq-list" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;"></div>
+                    <hr style="border: 1px solid #ddd; margin: 10px 0;">
+                    <input type="text" id="faqQuestion" placeholder="Pregunta (Ej: ¿Cómo adopto?)">
+                    <textarea id="faqAnswer" placeholder="Respuesta..."></textarea>
+                    <button class="btn btn-primary" onclick="addFaq()">Agregar Pregunta</button>
                 </div>
 
+                <!-- FORM SPONSOR LOGO (NUEVO) -->
+                <div class="admin-form" id="addSponsorLogoForm">
+                    <h3>Empresas / Sponsors</h3>
+                    <div id="admin-sponsor-logo-list" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;"></div>
+                    <hr style="border: 1px solid #ddd; margin: 10px 0;">
+                    <input type="text" id="sponsorLogoName" placeholder="Nombre de la Empresa">
+                    <div class="file-input-wrapper"><span class="file-input-btn"><i class="fas fa-image"></i> Subir Logo</span><input type="file" id="sponsorLogoFile" accept="image/*" onchange="previewImage(this, 'sponsorLogoPreview')"></div>
+                    <img id="sponsorLogoPreview" style="display:none; max-height: 150px; border-radius: 10px; object-fit: contain; margin: 0 auto;">
+                    <button class="btn btn-primary" onclick="addSponsorLogo()">Agregar Sponsor</button>
+                </div>
+
+                <!-- AJUSTES GENERALES Y REDES (VOLVIERON) -->
                 <div class="admin-form" id="settingsForm">
-                    <h3>Ajustes Generales</h3>
+                    <h3>Ajustes y Redes Sociales</h3>
                     <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: -5px;">Link de Mercado Pago (Donaciones):</label>
                     <input type="url" id="donationLinkInput" placeholder="https://mpago.la/tu-link">
                     <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: -5px; margin-top: 10px;">Número de WhatsApp:</label>
                     <input type="text" id="whatsappInput" placeholder="Ej: 59895876666">
+                    <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: -5px; margin-top: 10px;">Link de Instagram:</label>
+                    <input type="url" id="instagramInput" placeholder="https://instagram.com/...">
+                    <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: -5px; margin-top: 10px;">Link de Facebook:</label>
+                    <input type="url" id="facebookInput" placeholder="https://facebook.com/...">
+                    <label style="font-size: 0.9rem; font-weight: 600; margin-bottom: -5px; margin-top: 10px;">Link de TikTok:</label>
+                    <input type="url" id="tiktokInput" placeholder="https://tiktok.com/...">
                     <button class="btn btn-primary" style="margin-top: 15px;" onclick="saveSettings()">Guardar Ajustes</button>
                 </div>
 
@@ -387,7 +389,6 @@
             <div class="events-grid" id="events-container"></div>
         </section>
 
-        <!-- NUEVA SECCIÓN NOSOTROS -->
         <section id="nosotros" class="container fade-in" style="background-color: var(--accent-color); max-width: 100%;">
             <div style="max-width: 1200px; margin: 0 auto; width: 90%;">
                 <h2 class="section-title">Sobre Nosotros</h2>
@@ -396,40 +397,25 @@
                         <h3>Nuestra Historia</h3>
                         <p>Salva Animales ONG nació con el sueño de rescatar, rehabilitar y encontrar hogares responsables para animales en situación de calle. Lo que empezó con un pequeño grupo de voluntarios, hoy es una organización comprometida con el bienestar animal.</p>
                         <p>No recibimos fondos del estado; nos sostenemos gracias a las donaciones, la tienda solidaria y el esfuerzo de nuestros padrinos y voluntarios.</p>
-                        <div class="legal-badge"><i class="fas fa-certificate"></i> ONG Legalmente Constituida - Personería Jurídica en trámite</div>
+                        <div class="legal-badge"><i class="fas fa-certificate"></i> ONG Legalmente Constituida</div>
                     </div>
-                    <div class="about-img">
-                        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Equipo Salva Animales">
-                    </div>
+                    <div class="about-img"><img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Equipo"></div>
                 </div>
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN VOLUNTARIADO -->
         <section id="voluntariado" class="volunteer-section fade-in">
             <div class="container">
                 <h2>¿Querés ser parte del cambio?</h2>
-                <p>No solo de donaciones vive una ONG. Necesitamos personas dispuestas a dar un hogar temporal (tránsito), ayudar en las jornadas de adopción, o transportar animales al veterinario.</p>
-                <a href="https://wa.me/59895876666?text=Hola,%20quiero%20ser%20voluntario%20de%20Salva%20Animales" target="_blank" class="btn btn-primary" style="background: var(--whatsapp-color); color: white;">Quiero ser Voluntario <i class="fab fa-whatsapp"></i></a>
+                <p>No solo de donaciones vive una ONG. Necesitamos personas dispuestas a dar un hogar temporal (tránsito), ayudar en las jornadas o transportar animales.</p>
+                <a href="#" target="_blank" class="btn btn-primary" style="background: var(--whatsapp-color); color: white;">Quiero ser Voluntario <i class="fab fa-whatsapp"></i></a>
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN FAQ -->
         <section class="container fade-in">
             <h2 class="section-title">Preguntas Frecuentes</h2>
-            <div class="faq-section">
-                <details>
-                    <summary>¿Cuáles son los requisitos para adoptar?</summary>
-                    <p>Ser mayor de edad, presentar cédula de identidad, tener el consentimiento de todos los integrantes de la familia, y comprometerse a mantener al animal dentro del hogar (no en el patio ni en la calle), brindarle alimentación, atención veterinaria y mucho amor.</p>
-                </details>
-                <details>
-                    <summary>¿Se puede adoptar si vivo en un apartamento?</summary>
-                    <p>¡Claro que sí! Lo importante no es el tamaño del hogar, sino el tiempo y la dedicación que le puedas dar al perrito. Evaluamos cada caso en particular para asegurar que sea el hogar ideal para ambos.</p>
-                </details>
-                <details>
-                    <summary>¿Los perros se entregan vacunados y castrados?</summary>
-                    <p>Depende del perro. En cada tarjeta de adopción indicamos si ya está castrado y su estado de vacunas. Si falta alguna, desde la ONG nos encargamos del proceso antes de la adopción o te acompañamos en el seguimiento posterior.</p>
-                </details>
+            <div class="faq-section" id="faq-container">
+                <!-- Se carga dinámicamente -->
             </div>
         </section>
 
@@ -448,11 +434,17 @@
             </div>
         </section>
         
-        <!-- SECCIÓN DE ÉXITOS -->
         <section id="exitos-section" class="container fade-in">
             <h2 class="section-title">¡Adopciones Realizadas!</h2>
-            <p style="text-align: center; margin-bottom: 40px; color: var(--text-light);">Gracias a las familias que les dieron un hogar lleno de amor.</p>
             <div class="success-grid" id="success-container"></div>
+        </section>
+
+        <!-- SECCIÓN SPONSORS (EMPRESAS) -->
+        <section class="sponsors-section fade-in">
+            <div class="container">
+                <h2 class="section-title" style="font-size: 2rem; margin-bottom: 30px;">Con el Apoyo de:</h2>
+                <div class="sponsors-grid" id="sponsors-logos-container"></div>
+            </div>
         </section>
     </div>
 
@@ -482,7 +474,7 @@
         <div class="container">
             <img src="logo.png" alt="Logo" id="footerLogo">
             <h3 style="color: white; font-size: 1.5rem; margin-bottom: 15px;">Salva Animales ONG</h3>
-            <p style="max-width: 600px; margin: 0 auto 20px auto;">ONG constituida legalmente dedicada al rescate, rehabilitación y adopción responsable.</p>
+            <p style="max-width: 600px; margin: 0 auto 20px auto;">ONG dedicada al rescate, rehabilitación y adopción responsable.</p>
             <a href="#" class="transparency-link"><i class="fas fa-file-pdf"></i> Ver Balances y Estatutos</a>
             <div class="footer-contact" id="footerWhatsapp"><i class="fab fa-whatsapp"></i> Cargando...</div>
             <div class="social-footer" style="margin-top: 30px;">
@@ -494,7 +486,6 @@
         </div>
     </footer>
 
-    <!-- SCRIPT (Mismo de la versión anterior + Animación Scroll) -->
     <script>
         const CLAVE_ENCRIPTADA = "U2FsdmFBbmltYWxlczIwMjc=";
         
@@ -503,31 +494,33 @@
         let currentProdImgBase64 = "";
         let currentEventImgBase64 = "";
         let currentSuccessImgBase64 = "";
+        let currentSponsorLogoBase64 = "";
         
-        let config = { whatsapp: "59895876666", donationLink: "https://www.mercadopago.com.uy/" };
+        let config = { 
+            whatsapp: "59895876666", 
+            donationLink: "https://www.mercadopago.com.uy/",
+            instagram: "#",
+            facebook: "#",
+            tiktok: "#"
+        };
 
-        // --- ANIMACIÓN SCROLL ---
         function reveal() {
             var reveals = document.querySelectorAll(".fade-in");
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("visible");
-                }
+                if (elementTop < windowHeight - 100) reveals[i].classList.add("visible");
             }
         }
         window.addEventListener("scroll", reveal);
         window.addEventListener("load", reveal);
 
-        // --- NAVEGACIÓN ---
         function showPage(pageName) {
             document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
             if(pageName === 'store') document.getElementById('view-store').classList.add('active');
             else document.getElementById('view-main').classList.add('active');
             window.scrollTo(0, 0); 
-            reveal(); // Trigger animation
+            reveal();
         }
 
         function toggleMenu() {
@@ -552,7 +545,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // --- DONACIÓN ---
         function openDonationModal() {
             document.getElementById('donationModal').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -568,13 +560,11 @@
             const name = document.getElementById('donName').value.trim();
             const phone = document.getElementById('donPhone').value.trim();
             if(!name || !phone) return alert("Por favor, completá tu nombre y teléfono.");
-
             let sponsors = JSON.parse(localStorage.getItem('sponsors')) || [];
             let existingSponsorIndex = sponsors.findIndex(s => s.name.toLowerCase() === name.toLowerCase() || s.phone === phone);
-
             if (existingSponsorIndex > -1) {
                 sponsors[existingSponsorIndex].paws += 1;
-                alert(`¡Gracias por donar de nuevo, ${name}! Se sumó 1 patita más a tu perfil.`);
+                alert(`¡Gracias por donar de nuevo, ${name}! Se sumó 1 patita más.`);
             } else {
                 sponsors.push({ id: Date.now(), name: name, phone: phone, paws: 1 });
                 alert(`¡Muchas gracias ${name}! Ya sos parte del muro de padrinos.`);
@@ -585,7 +575,6 @@
             window.open(config.donationLink, '_blank');
         }
 
-        // --- IMÁGENES Y ADMIN ---
         function previewImage(input, previewId) {
             const file = input.files[0];
             if (file) {
@@ -599,6 +588,7 @@
                     if (previewId === 'prodImgPreview') currentProdImgBase64 = e.target.result;
                     if (previewId === 'eventImgPreview') currentEventImgBase64 = e.target.result;
                     if (previewId === 'successImgPreview') currentSuccessImgBase64 = e.target.result;
+                    if (previewId === 'sponsorLogoPreview') currentSponsorLogoBase64 = e.target.result;
                 };
                 reader.readAsDataURL(file);
             }
@@ -611,7 +601,7 @@
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('adminPanel').style.display = 'block';
                 loadSettingsForm();
-                renderPets(); renderSponsors(); renderProducts(); renderEventsAdmin(); renderSuccessAdmin(); 
+                renderPets(); renderSponsors(); renderProducts(); renderEventsAdmin(); renderSuccessAdmin(); renderFaqAdmin(); renderSponsorLogoAdmin(); 
             } else {
                 document.getElementById('loginError').style.display = 'block';
             }
@@ -626,7 +616,13 @@
         }
 
         function closeAdminModal() { document.getElementById('adminModal').classList.remove('active'); }
-        function logout() { isAdminMode = false; closeAdminModal(); renderPets(); renderSponsors(); renderProducts(); renderEventsFront(); renderSuccessFront(); }
+        
+        // LOGOUT: Desactiva el modo admin y recarga las vistas para OCULTAR botones
+        function logout() { 
+            isAdminMode = false; 
+            closeAdminModal(); 
+            renderPets(); renderSponsors(); renderProducts(); renderEventsFront(); renderSuccessFront(); renderFaqFront(); renderSponsorLogoFront(); 
+        }
 
         function showAdminTab(tabId) {
             document.querySelectorAll('.admin-form').forEach(form => form.classList.remove('active'));
@@ -644,7 +640,7 @@
             }
         }
 
-        // --- CRUD ---
+        // --- CRUD PERROS ---
         function savePet() {
             const id = document.getElementById('editPetId').value;
             const name = document.getElementById('petName').value;
@@ -705,7 +701,9 @@
             if(pets.length === 0) { container.innerHTML = '<p style="text-align:center; width:100%;">No hay perritos cargados aún.</p>'; return; }
 
             pets.forEach(pet => {
+                // LOS BOTONES SOLO APARECEN SI isAdminMode ES TRUE
                 let actionButtons = isAdminMode ? `<div style="display:flex; justify-content:center; gap:10px; margin-top:10px;"><button class="btn-admin-action btn-edit" onclick="editPet(${pet.id})"><i class="fas fa-edit"></i> Editar</button><button class="btn-admin-action btn-delete" onclick="deleteItem('pets', ${pet.id})"><i class="fas fa-trash"></i> Borrar</button></div>` : '';
+                
                 let castradoIcon = pet.castrated && pet.castrated.includes("Falta") ? `<i class="fas fa-exclamation-circle" style="color:var(--warning);"></i>` : `<i class="fas fa-check-circle" style="color:var(--success);"></i>`;
                 let vacunaIcon = pet.vaccinated && pet.vaccinated.includes("Falta") ? `<i class="fas fa-exclamation-circle" style="color:var(--warning);"></i>` : `<i class="fas fa-check-circle" style="color:var(--success);"></i>`;
 
@@ -729,6 +727,88 @@
             filterPets(activeTab && activeTab.innerText.includes('Adultos') ? 'adultos' : 'cachorros', activeTab);
         }
 
+        // --- CRUD FAQ ---
+        function addFaq() {
+            const q = document.getElementById('faqQuestion').value;
+            const a = document.getElementById('faqAnswer').value;
+            if(!q || !a) return alert("Completá la pregunta y la respuesta");
+            
+            let faqs = JSON.parse(localStorage.getItem('faqs')) || [];
+            faqs.push({ id: Date.now(), q, a });
+            localStorage.setItem('faqs', JSON.stringify(faqs));
+            
+            alert("Pregunta agregada");
+            document.getElementById('faqQuestion').value = '';
+            document.getElementById('faqAnswer').value = '';
+            renderFaqAdmin(); renderFaqFront();
+        }
+
+        function renderFaqAdmin() {
+            const list = document.getElementById('admin-faq-list');
+            let faqs = JSON.parse(localStorage.getItem('faqs')) || [];
+            list.innerHTML = faqs.length === 0 ? '<p>No hay preguntas.</p>' : '';
+            faqs.forEach(f => {
+                list.innerHTML += `<div style="background:white; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid #ddd;"><span><strong>${f.q}</strong></span><button class="btn-admin-action btn-delete" style="width:auto;" onclick="deleteItem('faqs', ${f.id})"><i class="fas fa-trash"></i></button></div>`;
+            });
+        }
+
+        function renderFaqFront() {
+            const container = document.getElementById('faq-container');
+            let faqs = JSON.parse(localStorage.getItem('faqs')) || [];
+            
+            // FAQ por defecto si está vacío
+            if(faqs.length === 0) {
+                faqs = [
+                    { id: 1, q: "¿Cuáles son los requisitos para adoptar?", a: "Ser mayor de edad, presentar cédula, tener consentimiento familiar y comprometerse a cuidarlo dentro del hogar." },
+                    { id: 2, q: "¿Los perros se entregan vacunados?", a: "Depende del perro. En cada tarjeta indicamos su estado de salud." }
+                ];
+            }
+            
+            container.innerHTML = '';
+            faqs.forEach(f => {
+                container.innerHTML += `<details><summary>${f.q}</summary><p>${f.a}</p></details>`;
+            });
+        }
+
+        // --- CRUD SPONSOR LOGO (EMPRESAS) ---
+        function addSponsorLogo() {
+            const name = document.getElementById('sponsorLogoName').value;
+            if(!name || !currentSponsorLogoBase64) return alert("Completá el nombre y subí el logo");
+            
+            let logos = JSON.parse(localStorage.getItem('sponsorLogos')) || [];
+            logos.push({ id: Date.now(), name, img: currentSponsorLogoBase64 });
+            localStorage.setItem('sponsorLogos', JSON.stringify(logos));
+            
+            alert("Sponsor agregado");
+            document.getElementById('sponsorLogoName').value = '';
+            document.getElementById('sponsorLogoPreview').style.display = 'none';
+            currentSponsorLogoBase64 = "";
+            renderSponsorLogoAdmin(); renderSponsorLogoFront();
+        }
+
+        function renderSponsorLogoAdmin() {
+            const list = document.getElementById('admin-sponsor-logo-list');
+            let logos = JSON.parse(localStorage.getItem('sponsorLogos')) || [];
+            list.innerHTML = logos.length === 0 ? '<p>No hay sponsors cargados.</p>' : '';
+            logos.forEach(l => {
+                list.innerHTML += `<div style="background:white; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid #ddd;"><span><strong>${l.name}</strong></span><button class="btn-admin-action btn-delete" style="width:auto;" onclick="deleteItem('sponsorLogos', ${l.id})"><i class="fas fa-trash"></i></button></div>`;
+            });
+        }
+
+        function renderSponsorLogoFront() {
+            const container = document.getElementById('sponsors-logos-container');
+            let logos = JSON.parse(localStorage.getItem('sponsorLogos')) || [];
+            if(logos.length === 0) { 
+                container.innerHTML = '<p style="color:var(--text-light);">Próximamente...</p>'; 
+                return; 
+            }
+            container.innerHTML = '';
+            logos.forEach(l => {
+                container.innerHTML += `<img src="${l.img}" alt="${l.name}" class="sponsor-logo" title="${l.name}" onclick="showLightbox(this.src)">`;
+            });
+        }
+
+        // --- CRUD OTROS ---
         function addEvent() {
             const title = document.getElementById('eventTitle').value;
             const date = document.getElementById('eventDate').value;
@@ -811,28 +891,19 @@
             renderProducts();
         }
 
-        function addSponsorManual() {
-            const name = document.getElementById('sponsorName').value;
-            const paws = parseInt(document.getElementById('sponsorPaws').value) || 1;
-            if(!name) return alert("Ingresá un nombre");
-            let sponsors = JSON.parse(localStorage.getItem('sponsors')) || [];
-            sponsors.push({ id: Date.now(), name, phone: "Manual", paws });
-            localStorage.setItem('sponsors', JSON.stringify(sponsors));
-            alert("Padrino agregado manualmente");
-            document.getElementById('sponsorName').value = '';
-            renderSponsors();
-        }
-
         function deleteItem(key, id) {
             if(!confirm("¿Seguro que querés eliminar esto definitivamente?")) return;
             let items = JSON.parse(localStorage.getItem(key)) || [];
             items = items.filter(item => item.id !== id);
             localStorage.setItem(key, JSON.stringify(items));
+            
             if(key === 'pets') renderPets();
             if(key === 'sponsors') renderSponsors();
             if(key === 'products') renderProducts();
             if(key === 'events') { renderEventsAdmin(); renderEventsFront(); }
             if(key === 'success') { renderSuccessAdmin(); renderSuccessFront(); }
+            if(key === 'faqs') { renderFaqAdmin(); renderFaqFront(); }
+            if(key === 'sponsorLogos') { renderSponsorLogoAdmin(); renderSponsorLogoFront(); }
         }
 
         function renderProducts() {
@@ -843,10 +914,13 @@
             products.forEach(p => {
                 let stockHtml = `<p class="product-stock">Stock: <strong>${p.stock}</strong></p>`;
                 let adminStockControls = '';
+                
+                // CONTROLES SOLO EN ADMIN MODE
                 if(isAdminMode) {
-                    adminStockControls = `<div class="stock-controls"><button class="stock-btn" onclick="updateStock(${p.id}, -1)">-</button><span class="stock-num">${p.stock}</span><button class="stock-btn" onclick="updateStock(${p.id}, 1)">+</button></div><button class="btn-admin-action btn-delete" style="width:100%; margin-top:10px;" onclick="deleteItem('products', ${p.id})"><i class="fas fa-trash"></i> Borrar</button>`;
+                    adminStockControls = `<div class="stock-controls"><button class="stock-btn" onclick="updateStock(${p.id}, -1)">-</button><span class="stock-num">${p.stock}</span><button class="stock-btn" onclick="updateStock(${p.id}, 1)">+</button></div><button class="btn-admin-action btn-delete" style="width:100%; margin-top:10px;" onclick="deleteItem('products', ${p.id})"><i class="fas fa-trash"></i> Borrar Producto</button>`;
                     stockHtml = `<p class="product-stock">Modificar Stock:</p>`;
                 }
+                
                 let selectorsHtml = '';
                 if(!isAdminMode && p.stock > 0) {
                     selectorsHtml = `<div class="product-options">`;
@@ -860,7 +934,9 @@
                     }
                     selectorsHtml += `</div>`;
                 }
+                
                 const buyBtn = p.stock > 0 ? `<button onclick="buyProduct(${p.id})" class="btn btn-mp"><i class="fab fa-whatsapp"></i> Comprar</button>` : `<button class="btn btn-mp" style="background:#ccc; cursor:not-allowed;" disabled>Sin Stock</button>`;
+                
                 container.innerHTML += `<div class="product-card"><img src="${p.img}" onclick="showLightbox(this.src)"><div class="product-info"><h3>${p.name}</h3><p style="font-size:0.9rem; color:#666;">${p.desc || ''}</p><div class="product-price">${p.price}</div>${selectorsHtml}${stockHtml}${adminStockControls}${!isAdminMode ? buyBtn : ''}</div></div>`;
             });
         }
@@ -914,14 +990,22 @@
             });
         }
 
+        // --- AJUSTES Y REDES ---
         function loadSettingsForm() {
             document.getElementById('donationLinkInput').value = config.donationLink;
             document.getElementById('whatsappInput').value = config.whatsapp;
+            document.getElementById('instagramInput').value = config.instagram;
+            document.getElementById('facebookInput').value = config.facebook;
+            document.getElementById('tiktokInput').value = config.tiktok;
         }
 
         function saveSettings() {
             config.donationLink = document.getElementById('donationLinkInput').value;
             config.whatsapp = document.getElementById('whatsappInput').value.replace(/\D/g,''); 
+            config.instagram = document.getElementById('instagramInput').value;
+            config.facebook = document.getElementById('facebookInput').value;
+            config.tiktok = document.getElementById('tiktokInput').value;
+            
             localStorage.setItem('siteConfig', JSON.stringify(config));
             applyConfig();
             alert("Ajustes guardados.");
@@ -937,8 +1021,12 @@
             const waNum = config.whatsapp || "59895876666";
             document.getElementById('footerWhatsapp').innerHTML = `<i class="fab fa-whatsapp"></i> ${waNum}`;
             document.getElementById('floatingWhatsapp').href = `https://wa.me/${waNum}`;
-            // Actualizamos el botón de voluntariado también con el número correcto
-            document.querySelector('.volunteer-section a').href = `https://wa.me/${waNum}?text=Hola,%20quiero%20ser%20voluntario%20de%20Salva%20Animales`;
+            document.querySelector('.volunteer-section a').href = `https://wa.me/${waNum}?text=Hola,%20quiero%20ser%20voluntario`;
+            
+            // Redes Sociales
+            document.getElementById('linkInstagram').href = config.instagram || "#";
+            document.getElementById('linkFacebook').href = config.facebook || "#";
+            document.getElementById('linkTiktok').href = config.tiktok || "#";
         }
 
         window.onload = function() {
@@ -948,8 +1036,15 @@
                 document.getElementById('mainLogo').src = customLogo;
                 document.getElementById('footerLogo').src = customLogo;
             }
-            renderPets(); renderEventsFront(); renderSuccessFront(); renderSponsors(); renderProducts();
-            reveal(); // Iniciar animaciones
+            // Carga inicial de vistas
+            renderPets(); 
+            renderEventsFront(); 
+            renderSuccessFront(); 
+            renderSponsors(); 
+            renderProducts();
+            renderFaqFront();
+            renderSponsorLogoFront();
+            reveal();
         }
     </script>
 </body>
